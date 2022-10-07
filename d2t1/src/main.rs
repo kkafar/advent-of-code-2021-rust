@@ -32,10 +32,8 @@ impl<'a> AddAssign<PositionDelta<'a>> for Position {
 
 impl<'a> Into<PositionDelta<'a>> for &'a str {
     fn into(self) -> PositionDelta<'a> {
-        let splitted = self.split(' ')
-            .collect::<Vec<&str>>();
-        
-        return PositionDelta { direction: splitted[0], magnitude: splitted[1].parse::<i32>().unwrap() }
+        let splitted = self.split_once(' ').unwrap();
+        return PositionDelta { direction: splitted.0, magnitude: splitted.1.parse::<i32>().unwrap() }
     }
 }
 
